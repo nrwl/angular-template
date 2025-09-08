@@ -1,0 +1,60 @@
+name: Regenerate Repository
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+
+  # Weekly schedule (Sundays at 2 AM UTC)
+  schedule:
+    - cron: '0 2 * * 0'
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate-template:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout workflow repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (if needed for generation script)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Template Generator Bot"
+          git config --global user.email "hello@nrwl.io"
+
+      - name: Clear repository contents (preserve .git)
+        run: |
+          # Remove all files except .git directory
+          find . -mindepth 1 -maxdepth 1 ! -name '.git*' -exec rm -rf {} +
+
+      - name: Generate new content
+        run: |
+          npx -y create-nx-workspace@latest org --preset=angular-monorepo --appName=myapp --routing=true --style=css --bundler=esbuild --unitTestRunner=vitest --e2eTestRunner=playwright --ci=skip  --skipGit=true --no-interactive
+          mv org/* . 2>/dev/null
+          mv org/.* . 2>/dev/null
+          rm -rf org
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git add .
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🤖 Regenerate repository content - $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            git push origin main
+            echo "Changes pushed successfully"
+          fi
+
+      - name: Cleanup
+        if: always()
+        run: |
+          rm -rf target-repo
