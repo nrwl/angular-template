@@ -1,0 +1,9 @@
+{
+  "name": "feature-product-detail",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shop/feature-product-detail/src",
+  "prefix": "shop",
+  "tags": ["scope:shop", "type:feature"],
+  "targets": {}
+}
