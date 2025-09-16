@@ -1,0 +1,20 @@
+{
+  "name": "data",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shop/data/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:shop", "type:data"],
+  "targets": {
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/shop/data"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
