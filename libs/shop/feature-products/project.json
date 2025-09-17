@@ -4,16 +4,22 @@
   "projectType": "library",
   "sourceRoot": "libs/shop/feature-products/src",
   "prefix": "shop",
-  "tags": ["scope:shop", "type:feature"],"targets": {
-  "test": {
-    "executor": "@nx/vite:test",
-    "outputs": ["{options.reportsDirectory}"],
-    "options": {
-      "reportsDirectory": "../../../coverage/libs/shop/feature-products"
+  "tags": [
+    "scope:shop",
+    "type:feature"
+  ],
+  "targets": {
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/shop/feature-products"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
     }
-  },
-  "lint": {
-    "executor": "@nx/eslint:lint"
   }
-}
 }

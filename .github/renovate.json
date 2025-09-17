@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":semanticCommitScopeDisabled"
+  ],
+  // Wait 3 days.
+  // https://docs.npmjs.com/policies/unpublish/#packages-published-less-than-72-hours-ago
+  "minimumReleaseAge": "3 days",
+  "packageRules": [
+    // Allow nx to manage dependencies
+    {
+      "matchPackageNames": ["*"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["@nx/workspace"],
+      "enabled": true,
+      "semanticCommitType": "chore"
+    }
+  ],
+  "rebaseWhen": "conflicted"
+}

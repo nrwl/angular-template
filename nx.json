@@ -44,6 +44,13 @@
       "inputs": ["production", "^production"]
     }
   },
+  "release": {
+    "projects": ["api"],
+    "projectsRelationship": "independent",
+    "docker": {
+      "skipVersionActions": true
+    }
+  },
   "plugins": [
     {
       "plugin": "@nx/playwright/plugin",

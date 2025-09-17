@@ -1,0 +1,32 @@
+name: Verify PR
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: tree:0
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v5
+        with:
+          cache: 'npm'
+
+      - run: npm ci --legacy-peer-deps
+      - run: npx playwright install --with-deps
+
+      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
+      # - run: npx nx-cloud record -- echo Hello World
+      # When you enable task distribution, run the e2e-ci task instead of e2e
+      - run: npx nx run-many -t lint test build typecheck e2e
