@@ -30,16 +30,16 @@ This repository demonstrates a production-ready Angular monorepo with:
 ```bash
 # Clone the repository
 git clone <your-fork-url>
-cd angular-template
+cd <your-repository-name>
 
 # Install dependencies
 # (Note: You may need --legacy-peer-deps)
 npm install
 
-# Serve the Angular shop application
+# Serve the Angular shop application (this will simultaneously serve the API backend)
 npx nx serve shop
 
-# Serve the API backend
+# ...or you can serve the API separately
 npx nx serve api
 
 # Build all projects
