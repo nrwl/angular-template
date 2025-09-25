@@ -8,7 +8,7 @@ test.describe('Shop Homepage', () => {
   test('should display the main header and navigation', async ({ page }) => {
     // Check header title
     const header = page.locator('h1').first();
-    await expect(header).toContainText('Nx Shop Demos');
+    await expect(header).toContainText('Nx Shop Demo');
 
     // Check navigation link exists
     const productsLink = page.locator('nav a:has-text("Products")');
