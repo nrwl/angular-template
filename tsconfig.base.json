@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@org/api/products": ["packages/api/products/src/index.ts"],
+      "@org/models": ["packages/shared/models/src/index.ts"],
+      "@org/shop/data": ["packages/shop/data/src/index.ts"],
+      "@org/shop/feature-product-detail": [
+        "packages/shop/feature-product-detail/src/index.ts"
+      ],
+      "@org/shop/feature-products": ["packages/shop/feature-products/src/index.ts"],
+      "@org/shop/shared-ui": ["packages/shop/shared-ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
