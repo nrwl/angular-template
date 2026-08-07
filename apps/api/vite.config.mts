@@ -3,7 +3,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 
 export default defineConfig(() => ({
-  root: __dirname,
+  root: import.meta.dirname,
   cacheDir: '../../node_modules/.vite/apps/api',
   plugins: [tsconfigPaths(), nxCopyAssetsPlugin(['*.md'])],
   test: {

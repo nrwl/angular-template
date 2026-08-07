@@ -5,7 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 
 export default defineConfig(() => ({
-  root: __dirname,
+  root: import.meta.dirname,
   cacheDir: '../../../node_modules/.vite/packages/shop/feature-products',
   plugins: [angular(), tsconfigPaths(), nxCopyAssetsPlugin(['*.md'])],
   // Uncomment this if you are using workers.
