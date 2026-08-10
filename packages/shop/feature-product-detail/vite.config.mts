@@ -5,7 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 
 export default defineConfig(() => ({
-  root: __dirname,
+  root: import.meta.dirname,
   cacheDir: '../../../node_modules/.vite/packages/shop/feature-product-detail',
   plugins: [angular(), tsconfigPaths(), nxCopyAssetsPlugin(['*.md'])],
   // Uncomment this if you are using workers.
@@ -21,7 +21,8 @@ export default defineConfig(() => ({
     setupFiles: ['src/test-setup.ts'],
     reporters: ['default'],
     coverage: {
-      reportsDirectory: '../../../coverage/packages/shop/feature-product-detail',
+      reportsDirectory:
+        '../../../coverage/packages/shop/feature-product-detail',
       provider: 'v8' as const,
     },
   },
