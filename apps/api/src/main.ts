@@ -1,6 +1,13 @@
+#!/usr/bin/env tsx
+// @nx-target-name: serve
 import express from 'express';
 import { ProductsService } from '@org/api/products';
-import { ApiResponse, Product, ProductFilter, PaginatedResponse } from '@org/models';
+import {
+  ApiResponse,
+  Product,
+  ProductFilter,
+  PaginatedResponse,
+} from '@org/models';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3333;
@@ -15,7 +22,10 @@ app.use(express.json());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
   } else {
@@ -134,6 +144,10 @@ app.get('/api/products-metadata/price-range', (req, res) => {
   }
 });
 
-app.listen(port, host, () => {
+const server = app.listen(port, host, () => {
   console.log(`[ ready ] http://${host}:${port}`);
+});
+
+process.on('SIGTERM', () => {
+  server.close(() => process.exit(0));
 });
