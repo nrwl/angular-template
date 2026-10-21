@@ -9,6 +9,7 @@
     "build": {
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/shop",
         "browser": "apps/shop/src/main.ts",
@@ -48,13 +49,16 @@
           "extractLicenses": false,
           "sourceMap": true
         }
-      },
-      "defaultConfiguration": "production"
+      }
     },
     "serve": {
       "dependsOn": ["api:serve"],
       "continuous": true,
       "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/shop/proxy.conf.json"
+      },
       "configurations": {
         "production": {
           "buildTarget": "shop:build:production"
@@ -63,9 +67,8 @@
           "buildTarget": "shop:build:development"
         }
       },
-      "defaultConfiguration": "development",
-      "options": {
-        "proxyConfig": "apps/shop/proxy.conf.json"
+      "readyWhen": {
+        "signal": true
       }
     },
     "extract-i18n": {
@@ -77,6 +80,10 @@
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
+      "readyWhen": {
+        "signal": true
+      },
+      "dependsOn": ["build"],
       "options": {
         "buildTarget": "shop:build",
         "port": 4200,

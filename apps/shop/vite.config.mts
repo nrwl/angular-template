@@ -2,15 +2,14 @@
 import { defineConfig } from 'vite';
 import angular from '@analogjs/vite-plugin-angular';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
   cacheDir: '../../node_modules/.vite/apps/shop',
-  plugins: [angular(), tsconfigPaths(), nxCopyAssetsPlugin(['*.md'])],
+  plugins: [angular(), tsconfigPaths()],
   // Uncomment this if you are using workers.
   // worker: {
-  //  plugins: [ nxViteTsPaths() ],
+  //  plugins: [ tsconfigPaths() ],
   // },
   test: {
     name: 'shop',

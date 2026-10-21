@@ -19,22 +19,6 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
-    },
-    "@nx/eslint:lint": {
-      "cache": true,
-      "inputs": [
-        "default",
-        "^default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.mjs",
-        "{workspaceRoot}/tools/eslint-rules/**/*"
-      ]
-    },
-    "@nx/esbuild:esbuild": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
     }
   },
   "release": {
@@ -65,6 +49,14 @@
       }
     },
     {
+      "plugin": "@nx/js/typescript",
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        }
+      }
+    },
+    {
       "plugin": "@nx/vite/plugin",
       "options": {
         "buildTargetName": "build",
@@ -82,7 +74,14 @@
       "options": {
         "testTargetName": "test"
       }
-    }
+    },
+    {
+      "plugin": "@nx/rolldown/plugin",
+      "options": {
+        "buildTargetName": "build"
+      }
+    },
+    "@nx/js/tsx"
   ],
   "generators": {
     "@nx/angular:application": {
