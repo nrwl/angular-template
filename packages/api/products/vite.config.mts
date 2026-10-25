@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
   cacheDir: '../../../node_modules/.vite/packages/api/products',
-  plugins: [tsconfigPaths()],
+  resolve: { tsconfigPaths: true },
   test: {
     name: 'products',
     watch: false,

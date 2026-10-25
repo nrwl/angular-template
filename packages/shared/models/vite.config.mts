@@ -1,14 +1,9 @@
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
   cacheDir: '../../../node_modules/.vite/packages/shared/models',
-  plugins: [tsconfigPaths()],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ tsconfigPaths() ],
-  // },
+  resolve: { tsconfigPaths: true },
   test: {
     name: 'models',
     watch: false,
