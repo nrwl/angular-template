@@ -1,16 +1,12 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
 import angular from '@analogjs/vite-plugin-angular';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
   cacheDir: '../../../node_modules/.vite/packages/shop/feature-product-detail',
-  plugins: [angular(), tsconfigPaths()],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ tsconfigPaths() ],
-  // },
+  plugins: [angular()],
+  resolve: { tsconfigPaths: true },
   test: {
     name: 'feature-product-detail',
     watch: false,
